@@ -1,0 +1,6 @@
+select m.user_id
+from (select distinct user_id,
+       count(distinct VARIANT_NAME) as both_groups
+       from ab_test 
+      group by 1) m
+where m.both_groups = 2
