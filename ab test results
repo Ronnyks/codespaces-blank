@@ -1,0 +1,8 @@
+select VARIANT_NAME,
+       count(*) as total_count,
+       count(case when REVENUE > 0 then 1 end) as total_users_with_generated_revenue,
+       round(avg(REVENUE),2) as average_revenue,
+       round(avg(case when REVENUE > 0 then REVENUE end),2) as average_revenue_outliers_isolated,
+       count(distinct user_id) as contaminated_users
+from ab_test
+group by 1
